@@ -69,10 +69,25 @@ def prep_od(df):
     #change accident to Accident for uniformity
     df = df.replace({'MannerofDeath': 'accident'}, {'MannerofDeath': 'Accident'})   
 
+    #change race options
+    df = df.replace({'Race': 'Asian, Other'}, {'Race': 'Other'})
+    df = df.replace({'Race': 'Asian Indian'}, {'Race': 'Other'})   
+    df = df.replace({'Race': 'Chinese'}, {'Race': 'Other'}) 
+    df = df.replace({'Race': 'Native American, Other'}, {'Race': 'Other'})
+    df = df.replace({'Race': 'Hawaiian'}, {'Race': 'Other'}) 
+    df = df.replace({'Race': 'Hispanic, White'}, {'Race': 'Hispanic'}) 
+    df = df.replace({'Race': 'Hispanic, Black'}, {'Race': 'Hispanic'}) 
+
     #change dtype
     df.Age = df.Age.astype(int)
 
+    #encode Race using dummy columns
+    od_dummies = pd.get_dummies(df.Race, drop_first=True)
+    # join dummy columns back to df
+    df = pd.concat([df, od_dummies], axis=1)
+
     return df
+
 
 ############################## OD DEATHS SPLIT ##############################
 
