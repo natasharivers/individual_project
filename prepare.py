@@ -81,6 +81,8 @@ def prep_od(df):
     #change dtype
     df.Age = df.Age.astype(int)
 
+    df = df.drop(columns=['Unnamed: 0', 'ID', 'DateType', 'ResidenceCounty','ResidenceState', 'DeathCounty', 'InjuryCounty','InjuryState', 'ResidenceCityGeo', 'InjuryCityGeo', 'Other', 'OtherSignifican', 'LocationifOther', 'DeathCityGeo', 'InjuryCity'])  
+
     #encode Race using dummy columns
     od_dummies = pd.get_dummies(df.Race, drop_first=True)
     # join dummy columns back to df
