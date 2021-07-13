@@ -61,7 +61,7 @@ def prep_set(df):
     df = acquire.od_deaths_df()
 
     #drop columns
-    df = df.drop(columns=['Unnamed: 0', 'DateType', 'ResidenceCounty','ResidenceState', 'DeathCounty', 'InjuryCounty','InjuryState', 'ResidenceCityGeo', 'InjuryCityGeo', 'Other', 'OtherSignifican', 'LocationifOther', 'DeathCityGeo', 'InjuryCity'])  
+    df = df.drop(columns=['Unnamed: 0', 'ID', 'DateType', 'ResidenceCounty','ResidenceState', 'DeathCounty', 'InjuryCounty','InjuryState', 'ResidenceCityGeo', 'InjuryCityGeo', 'Other', 'OtherSignifican', 'LocationifOther', 'DeathCityGeo', 'InjuryCity'])  
 
     #handle null values
     #impute with mean for numeric column
@@ -82,5 +82,14 @@ def prep_set(df):
     df = df.replace({'Race': 'Hawaiian'}, {'Race': 'Other'}) 
     df = df.replace({'Race': 'Hispanic, White'}, {'Race': 'Hispanic'}) 
     df = df.replace({'Race': 'Hispanic, Black'}, {'Race': 'Hispanic'}) 
+
+    # create dummy columns for race
+    race_dummies = pd.get_dummies(df.Race)
+    # add dummy columns to df
+    df = pd.concat([df, race_dummies], axis=1)
+
+    #change datatype
+    df.Age = df.Age.astype(int)
+    df.Fentanyl_Analogue = df.Fentanyl_Analogue.astype(int)
 
     return df
