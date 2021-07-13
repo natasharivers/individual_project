@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/80594235/125494606-d979da7d-a93b-490b-a5ea-7989cc6cc06a.png)
+
 # Individual Project-  Drug Related Overdose Deaths
 
 ## Natasha Rivers
@@ -6,8 +8,9 @@
 ______________________________________________________________________________________________________
 
 ## Abstract
-Being able to better understand the drug epidemic that has ripped across our country may help save the lives of those who are syffering from drug addiction. I chose to use age as the target variable in this project. Being able to target individuals of specific ages may allow us the create programs for that specific age range and possibly save lives. I created several visualizations, hypothesis tests and models to show the data. Ultimately, the OLS model performed best, outperforming the LassoLars, TweedieRegressor and the baseline models.  
+Being able to better understand the drug epidemic that has ripped across our country may help save the lives of those who are syffering from drug addiction. I chose to use age as the target variable in this project. Targeting individuals of specific ages may allow us the create programs for that specific age range and possibly save lives. The dataset that I chose described drug related overdose deaths between the years of 2012-2019. I was able to import the data and create a Pandas DataFrame to better visualize/analyze the data. I created several visualizations, hypothesis tests and models to show the data. Ultimately, the OLS model performed best, outperforming the LassoLars, TweedieRegressor and the baseline models.  
 
+______________________________________________________________________________________________________
 
 ## Goals
 - To determine if age plays a roll in drug related overdose deaths
@@ -87,7 +90,7 @@ ________________________________________________________________________________
 
 <br>
 
-#### Hypothesis 4: $X^2$ Test (discrete vs discrete)
+#### Hypothesis 4: Chi-Squared Test (discrete vs discrete)
 - Null Hypothesis: There is a relationship between Heroin and Oxycodone drug overdose deaths
 - Alternate Hypothesis: There is not a relationship between Heroin and Oxycodone drug overdose deaths
 
@@ -147,6 +150,7 @@ ________________________________________________________________________________
 ## Reproduction
 
 - Read this README.md
+- Download Drug Deaths Dataset from Kaggle into your working directory
 - Download the aquire.py, prepare.py, and Final_Notebook.ipynb files into your working directory
 - Run the Final_Notebook.ipynb notebook
 
