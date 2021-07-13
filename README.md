@@ -150,6 +150,7 @@ ________________________________________________________________________________
 ## Reproduction
 
 - Read this README.md
+- Download Drug Deaths Dataset from Kaggle into your working directory
 - Download the aquire.py, prepare.py, and Final_Notebook.ipynb files into your working directory
 - Run the Final_Notebook.ipynb notebook
 
