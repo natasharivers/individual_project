@@ -9,84 +9,17 @@ from sklearn.linear_model import LinearRegression, TweedieRegressor, LassoLars
 
 import acquire
 
-############################## NULL VALUES ##############################
-
-def handle_missing_values(df, prop_required_column = .5, prop_required_row = .75):
-    ''' 
-    take in a dataframe and a proportion for columns and rows
-    return dataframe with columns and rows not meeting proportions dropped
-    '''
-    # calc column threshold
-    col_thresh = int(round(prop_required_column*df.shape[0],0)) 
-    # drop columns with non-nulls less than threshold
-    df.dropna(axis=1, thresh=col_thresh, inplace=True) 
-    # calc row threshhold
-    row_thresh = int(round(prop_required_row*df.shape[1],0))  
-    # drop columns with non-nulls less than threshold
-    df.dropna(axis=0, thresh=row_thresh, inplace=True) 
-    
-    return df   
-
 ############################## IMPUTE MISSING VALUES  ##############################
 
-def impute(df, my_strategy, column_list):
+def impute(df, strategy, column_list):
     ''' 
-    take in a df strategy and cloumn list
-    return df with listed columns imputed using input stratagy
+    take in a df strategy and column list
+    return df with listed columns imputed using input strategy
     '''
     #create imputer   
-    imputer = SimpleImputer(strategy=my_strategy)
+    imputer = SimpleImputer(strategy=strategy)
     #fit/transform selected columns
     df[column_list] = imputer.fit_transform(df[column_list])
-
-    return df
-
-############################## PREP ZILLOW  ##############################
-
-def prep_od(df):
-    '''
-    This function takes in the od_deaths_df acquired ,
-    then drops or nulls all null values
-    Returns a cleaned od_deaths_df.
-    '''
-    #import from acquire.py
-    df = acquire.od_deaths_df
-
-    #replace blank spaces and special characters
-    df = df.replace(r'^\s*$', np.nan, regex=True)
-
-    #handle null values
-    #drop using threshold
-    df = handle_missing_values(df, prop_required_column = .5, prop_required_row = .5)
-    #impute continuous columns using mean
-    df = impute(df, 'mean', ['Age'])
-    # imputing descrete columns with most frequent value
-    df = impute(df, 'most_frequent', ['Date', 'DateType', 'Sex', 'Race','ResidenceCity', 'DeathCity', 'Location', 'DescriptionofInjury', 'InjuryPlace', 'MannerofDeath']) 
-
-    #replace values in MannerofDeath for uniformity
-    #change ACCIDENT to Accident for uniformity
-    df = df.replace({'MannerofDeath': 'ACCIDENT'}, {'MannerofDeath': 'Accident'})
-    #change accident to Accident for uniformity
-    df = df.replace({'MannerofDeath': 'accident'}, {'MannerofDeath': 'Accident'})   
-
-    #change race options
-    df = df.replace({'Race': 'Asian, Other'}, {'Race': 'Other'})
-    df = df.replace({'Race': 'Asian Indian'}, {'Race': 'Other'})   
-    df = df.replace({'Race': 'Chinese'}, {'Race': 'Other'}) 
-    df = df.replace({'Race': 'Native American, Other'}, {'Race': 'Other'})
-    df = df.replace({'Race': 'Hawaiian'}, {'Race': 'Other'}) 
-    df = df.replace({'Race': 'Hispanic, White'}, {'Race': 'Hispanic'}) 
-    df = df.replace({'Race': 'Hispanic, Black'}, {'Race': 'Hispanic'}) 
-
-    #change dtype
-    df.Age = df.Age.astype(int)
-
-    df = df.drop(columns=['Unnamed: 0', 'ID', 'DateType', 'ResidenceCounty','ResidenceState', 'DeathCounty', 'InjuryCounty','InjuryState', 'ResidenceCityGeo', 'InjuryCityGeo', 'Other', 'OtherSignifican', 'LocationifOther', 'DeathCityGeo', 'InjuryCity'])  
-
-    #encode Race using dummy columns
-    od_dummies = pd.get_dummies(df.Race, drop_first=True)
-    # join dummy columns back to df
-    df = pd.concat([df, od_dummies], axis=1)
 
     return df
 
@@ -120,3 +53,34 @@ def od_deaths_split(df, target):
     print(f'test -> {test.shape}')
    
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
+
+############################## PREP OD DEATHS ##############################
+
+def prep_set(df):
+    #use function from acquire.py
+    df = acquire.od_deaths_df()
+
+    #drop columns
+    df = df.drop(columns=['Unnamed: 0', 'DateType', 'ResidenceCounty','ResidenceState', 'DeathCounty', 'InjuryCounty','InjuryState', 'ResidenceCityGeo', 'InjuryCityGeo', 'Other', 'OtherSignifican', 'LocationifOther', 'DeathCityGeo', 'InjuryCity'])  
+
+    #handle null values
+    #impute with mean for numeric column
+    df = impute(df, 'mean', ['Age'])
+    #imputing with most frequent value for descrete columns
+    df = impute(df, 'most_frequent', ['Date', 'Sex', 'Race','ResidenceCity', 'DeathCity', 'Location', 'DescriptionofInjury', 'InjuryPlace', 'MannerofDeath']) 
+
+    #change ACCIDENT to Accident for uniformity
+    df = df.replace({'MannerofDeath': 'ACCIDENT'}, {'MannerofDeath': 'Accident'})
+    #change accident to Accident for uniformity
+    df = df.replace({'MannerofDeath': 'accident'}, {'MannerofDeath': 'Accident'})
+    
+    #change race options
+    df = df.replace({'Race': 'Asian, Other'}, {'Race': 'Other'})
+    df = df.replace({'Race': 'Asian Indian'}, {'Race': 'Other'})   
+    df = df.replace({'Race': 'Chinese'}, {'Race': 'Other'}) 
+    df = df.replace({'Race': 'Native American, Other'}, {'Race': 'Other'})
+    df = df.replace({'Race': 'Hawaiian'}, {'Race': 'Other'}) 
+    df = df.replace({'Race': 'Hispanic, White'}, {'Race': 'Hispanic'}) 
+    df = df.replace({'Race': 'Hispanic, Black'}, {'Race': 'Hispanic'}) 
+
+    return df
