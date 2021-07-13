@@ -101,12 +101,12 @@ ________________________________________________________________________________
  
 ### --> Plan:
 - Use Trello Board to organize thoughts
-    - Link is available here: https://trello.com/b/GgCFkLpp/individual-project
+    - Link is available here: [Trello] (https://trello.com/b/GgCFkLpp/individual-project)
 
 <br>
 
 ### --> Acquire:
-- Data was acquire from: https://www.kaggle.com/ruchi798/drug-overdose-deaths
+- Data was acquire from: [Kaggle] (https://www.kaggle.com/ruchi798/drug-overdose-deaths)
 - Function created to acquire data and return a Pandas DataFrame
 
 <br>
