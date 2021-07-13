@@ -90,7 +90,7 @@ ________________________________________________________________________________
 
 <br>
 
-#### Hypothesis 4: $X^2$ Test (discrete vs discrete)
+#### Hypothesis 4: Chi-Squared Test (discrete vs discrete)
 - Null Hypothesis: There is a relationship between Heroin and Oxycodone drug overdose deaths
 - Alternate Hypothesis: There is not a relationship between Heroin and Oxycodone drug overdose deaths
 
