@@ -94,6 +94,11 @@ ________________________________________________________________________________
 - Null Hypothesis: There is a relationship between Heroin and Oxycodone drug overdose deaths
 - Alternate Hypothesis: There is not a relationship between Heroin and Oxycodone drug overdose deaths
 
+<br>
+
+#### Hypothesis 5: Chi-Squared Test (discrete vs discrete)
+- Null Hypothesis: There is a relationship between Fentanyl and Oxycodone drug overdose deaths
+- Alternate Hypothesis: There is not a relationship between Fentanyl and Oxycodone drug overdose deaths
 
 ______________________________________________________________________________________________________
 
