@@ -72,8 +72,7 @@ def prep_set(df):
     #change ACCIDENT to Accident for uniformity
     df = df.replace({'MannerofDeath': 'ACCIDENT'}, {'MannerofDeath': 'Accident'})
     #change accident to Accident for uniformity
-    df = df.replace({'MannerofDeath': 'accident'}, {'MannerofDeath': 'Accident'})
-    
+    df = df.replace({'MannerofDeath': 'accident'}, {'MannerofDeath': 'Accident'})   
     #change race options
     df = df.replace({'Race': 'Asian, Other'}, {'Race': 'Other'})
     df = df.replace({'Race': 'Asian Indian'}, {'Race': 'Other'})   
@@ -82,15 +81,33 @@ def prep_set(df):
     df = df.replace({'Race': 'Hawaiian'}, {'Race': 'Other'}) 
     df = df.replace({'Race': 'Hispanic, White'}, {'Race': 'Hispanic'}) 
     df = df.replace({'Race': 'Hispanic, Black'}, {'Race': 'Hispanic'}) 
+    #change location options
+    df = df.replace({'Location': 'Hospice'}, {'Location': 'Other'}) 
+    df = df.replace({'Location': 'Convalescent Home'}, {'Location': 'Other'}) 
+    df = df.replace({'Location': 'Nursing Home'}, {'Location': 'Other'}) 
+    #change Morphone_NotHeroin choices (Boolean)
+    df = df.replace({'Morphine_NotHeroin': 'PCP NEG'}, {'Morphine_NotHeroin': '0'})
+    df = df.replace({'Morphine_NotHeroin': 'NO RX BUT STRAWS'}, {'Morphine_NotHeroin': '0'})
+    df = df.replace({'Morphine_NotHeroin': 'STOLE MEDS'}, {'Morphine_NotHeroin': '0'})
+    df = df.replace({'Morphine_NotHeroin': '1ES'}, {'Morphine_NotHeroin': '0'})
+    #change AnyOpioid choices (Boolean)
+    df = df.replace({'AnyOpioid': 'N'}, {'AnyOpioid': '0'})
+    #change Fentanyl choices (Boolean)
+    df = df.replace({'Fentanyl': '1-A'}, {'Fentanyl': '1'})
+    df = df.replace({'Fentanyl': '1 (PTCH)'}, {'Fentanyl': '1'})
+    df = df.replace({'Fentanyl': '1 POPS'}, {'Fentanyl': '1'})
 
-    # create dummy columns for race
+    #create dummy columns for race
     race_dummies = pd.get_dummies(df.Race)
-    # add dummy columns to df
+    #add dummy columns to df
     df = pd.concat([df, race_dummies], axis=1)
 
     #change datatype
     df.Age = df.Age.astype(int)
     df.Fentanyl_Analogue = df.Fentanyl_Analogue.astype(int)
+    df.Morphine_NotHeroin = df.Morphine_NotHeroin.astype(int)
+    df.AnyOpioid = df.AnyOpioid.astype(int)
+    df.Fentanyl = df.Fentanyl.astype(int)
 
     return df
 
