@@ -74,7 +74,7 @@ ________________________________________________________________________________
 
 #### Hypothesis 1: T-Test (continuous vs discrete)
 - Null Hypothesis: There is a relationship between Age and White Race drug overdose deaths
-- Alternate Hypothesis: There is not a relationship between Age and With Race drug overdose deaths
+- Alternate Hypothesis: There is not a relationship between Age and White Race drug overdose deaths
 
 <br>
 
