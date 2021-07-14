@@ -8,7 +8,7 @@
 ______________________________________________________________________________________________________
 
 ## Abstract
-Being able to better understand the drug epidemic that has ripped across our country may help save the lives of those who are syffering from drug addiction. I chose to use age as the target variable in this project. Targeting individuals of specific ages may allow us the create programs for that specific age range and possibly save lives. The dataset that I chose described drug related overdose deaths between the years of 2012-2019. I was able to import the data and create a Pandas DataFrame to better visualize/analyze the data. I created several visualizations, hypothesis tests and models to show the data. Ultimately, the OLS model performed best, outperforming the LassoLars, TweedieRegressor and the baseline models.  
+Being able to better understand the drug epidemic that has ripped across our country may help save the lives of those who are suffering from drug addiction. I chose to use age as the target variable in this project. Targeting individuals of specific ages may allow us to create programs for that specific age range and possibly save lives. The dataset that I chose described drug related overdose deaths between the years of 2012-2019. I was able to import the data and create a Pandas DataFrame to better visualize/analyze the data. I created several visualizations, hypothesis tests and models to show the data. Ultimately, the OLS model performed best, outperforming the LassoLars, TweedieRegressor and the baseline models.  
 
 ______________________________________________________________________________________________________
 
